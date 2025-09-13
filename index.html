@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gaming Intelligence - AI-Powered Gaming on Blockchain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap");
+
+      :root {
+        --neon-blue: #00f5ff;
+        --neon-purple: #8a2be2;
+        --neon-pink: #ff1493;
+        --neon-gold: #ffd700;
+        --dark-bg: #0a0a0f;
+        --card-bg: rgba(20, 20, 30, 0.8);
+      }
+
+      * {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Exo 2", sans-serif;
+        background: var(--dark-bg);
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      .orbitron {
+        font-family: "Orbitron", monospace;
+      }
+
+      .cyberpunk-bg {
+        background: linear-gradient(
+          135deg,
+          #0a0a0f 0%,
+          #1a0a2e 50%,
+          #16213e 100%
+        );
+        position: relative;
+      }
+
+      .cyberpunk-bg::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            circle at 20% 50%,
+            rgba(0, 245, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(255, 20, 147, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(138, 43, 226, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .neon-glow {
+        box-shadow: 0 0 20px currentColor,
+          inset 0 0 20px rgba(255, 255, 255, 0.1);
+      }
+
+      .neon-text {
+        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor,
+          0 0 30px currentColor;
+      }
+
+      .holographic {
+        background: linear-gradient(
+          45deg,
+          rgba(0, 245, 255, 0.2) 0%,
+          rgba(138, 43, 226, 0.2) 25%,
+          rgba(255, 20, 147, 0.2) 50%,
+          rgba(255, 215, 0, 0.2) 75%,
+          rgba(0, 245, 255, 0.2) 100%
+        );
+        background-size: 400% 400%;
+        animation: holographic-shift 3s ease-in-out infinite;
+      }
+
+      @keyframes holographic-shift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .circuit-pattern {
+        background-image: linear-gradient(
+            90deg,
+            rgba(0, 245, 255, 0.1) 1px,
+            transparent 1px
+          ),
+          linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+      }
+
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px currentColor;
+        }
+        50% {
+          box-shadow: 0 0 40px currentColor, 0 0 60px currentColor;
+        }
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+      }
+
+      /* .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+
+      } */
+      .accordion-content {
+  display: none;
+}
+.accordion-content.active {
+  display: block;
+}
+
+
+      .accordion-content.active {
+        max-height: 200px;
+      }
+
+      .roadmap-line {
+        background: linear-gradient(
+          to right,
+          var(--neon-blue),
+          var(--neon-purple),
+          var(--neon-pink),
+          var(--neon-gold)
+        );
+        height: 4px;
+        position: relative;
+      }
+
+      .roadmap-point {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--neon-blue);
+        position: absolute;
+        top: -8px;
+        box-shadow: 0 0 20px currentColor;
+      }
+    </style>
+  </head>
+  <body class="cyberpunk-bg">
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 w-full z-50  backdrop-blur-md border-b border-cyan-500"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <img
+              src="./assets/logo.png"
+              alt="GI Logo"
+              class="rounded-lg"
+              style="width: 8%"
+            />
+            <!-- <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center">
+                        hjjjh
+                    </div> -->
+          </div>
+          <div class="hidden md:flex space-x-10">
+            <a href="#home" class="hover:text-cyan-400 transition-colors"
+              >Home</a
+            >
+            <a href="#about" class="hover:text-cyan-400 transition-colors"
+              >About</a
+            >
+            <a href="#token" class="hover:text-cyan-400 transition-colors"
+              >GIToken</a
+            >
+            <a href="#features" class="hover:text-cyan-400 transition-colors"
+              >Features</a
+            >
+            <a href="#roadmap" class="hover:text-cyan-400 transition-colors"
+              >Roadmap</a
+            >
+            <a href="#contact" class="hover:text-cyan-400 transition-colors"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+  id="home"
+  class="relative min-h-screen flex items-center justify-center"
+  style="
+    background-image: url('./assets/back.jpg');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+
+  <!-- Content -->
+  <div class="container mx-auto px-6 text-center relative z-10">
+    <h1
+      class="text-8xl md:text-7xl font-extrabold mb-6 text-white"
+    >
+      GAMING
+    </h1>
+     <h1
+      class="text-8xl md:text-7xl font-extrabold mb-6 text-white"
+    >
+      INTELLIGENCE
+    </h1>
+    <p class="text-xl md:text-2xl mb-8 text-gray-100">
+      The Future of AI-Powered Gaming on Blockchain
+    </p>
+    <div class="flex flex-col md:flex-row gap-4 justify-center">
+      <!-- <button
+        class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg font-bold neon-glow hover:scale-105 transition-transform"
+      >
+        Join Airdrop
+      </button> -->
+      <button
+        class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold neon-glow hover:scale-105 transition-transform"
+      >
+        Trade GI Token
+      </button>
+    </div>
+  </div>
+</section>
+
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2
+              class="text-5xl font-bold orbitron mb-6"
+              style="color: var(--neon-purple)"
+            >
+              About Us
+            </h2>
+            <p class="text-lg text-gray-300 leading-relaxed">
+              Gaming Intelligence (GI Token) is more than just a cryptocurrency
+              – it’s an ecosystem where Artificial Intelligence meets Blockchain
+              Gaming. We aim to empower players, developers, and investors by
+              combining advanced AI algorithms, NFT utilities, and GameFi
+              features into one futuristic platform.
+            </p>
+          </div>
+          <div class="relative">
+            <div
+              class="w-80 h-80 mx-auto holographic rounded-lg flex items-center justify-center"
+            >
+              <svg viewBox="0 0 200 200" class="w-64 h-64">
+                <img src="./assets/pic11.png" />
+                <!-- AI Robot -->
+                <!-- <rect x="70" y="40" width="60" height="80" fill="url(#robotGradient)" rx="10"/>
+                            <circle cx="85" cy="60" r="8" fill="var(--neon-blue)"/>
+                            <circle cx="115" cy="60" r="8" fill="var(--neon-blue)"/>
+                            <rect x="90" y="75" width="20" height="5" fill="var(--neon-pink)" rx="2"/> -->
+
+                <!-- Gamer Hand -->
+                <!-- <rect x="40" y="90" width="30" height="40" fill="url(#handGradient)" rx="15"/>
+                            <rect x="130" y="90" width="30" height="40" fill="url(#handGradient)" rx="15"/> -->
+
+                <!-- Handshake Effect -->
+                <!-- <circle cx="100" cy="110" r="30" fill="none" stroke="var(--neon-gold)" stroke-width="2" opacity="0.5">
+                                <animate attributeName="r" values="20;35;20" dur="2s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
+                            </circle> -->
+
+                <defs>
+                  <linearGradient
+                    id="robotGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop
+                      offset="0%"
+                      style="stop-color: var(--neon-blue); stop-opacity: 0.8"
+                    />
+                    <stop
+                      offset="100%"
+                      style="stop-color: var(--neon-purple); stop-opacity: 0.8"
+                    />
+                  </linearGradient>
+                  <linearGradient
+                    id="handGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop
+                      offset="0%"
+                      style="stop-color: var(--neon-pink); stop-opacity: 0.6"
+                    />
+                    <stop
+                      offset="100%"
+                      style="stop-color: var(--neon-gold); stop-opacity: 0.6"
+                    />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GI Token Section -->
+    <section id="token" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-5xl font-bold orbitron text-center mb-12"
+          style="color: var(--neon-gold)"
+        >
+          GI Token
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+          <div class="relative">
+            <div class="w-80 h-80 mx-auto">
+              <img src="./assets/gam.png" />
+              <!-- <svg viewBox="0 0 200 200" class="w-64 h-64">
+                            <circle cx="100" cy="100" r="80" fill="url(#coinGradient)" stroke="var(--neon-gold)" stroke-width="4"/>
+                            <text x="100" y="90" text-anchor="middle" class="orbitron font-bold" fill="white" font-size="24">GI</text>
+                            <text x="100" y="115" text-anchor="middle" fill="var(--neon-blue)" font-size="12">BNB Chain</text>
+                            
+                            BNB Chain Symbol -->
+              <!-- <polygon points="100,130 110,140 100,150 90,140" fill="var(--neon-gold)">
+                                <animateTransform attributeName="transform" type="rotate" values="0 100 140;360 100 140" dur="3s" repeatCount="indefinite"/>
+                            </polygon> -->
+
+              <!-- <defs>
+                                <radialGradient id="coinGradient">
+                                    <stop offset="0%" style="stop-color:var(--neon-gold);stop-opacity:0.8"/>
+                                    <stop offset="100%" style="stop-color:var(--neon-purple);stop-opacity:0.6"/>
+                                </radialGradient>
+                            </defs> -->
+              <!-- </svg> -->
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-6">
+            <div
+              class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-cyan-500 card-hover"
+            >
+              <h3
+                class="text-xl font-bold mb-2"
+                style="color: var(--neon-blue)"
+              >
+                In-Game Currency
+              </h3>
+              <p class="text-gray-300">
+                Use GI tokens for all in-game purchases and transactions
+              </p>
+            </div>
+            <div
+              class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-purple-500 card-hover"
+            >
+              <h3
+                class="text-xl font-bold mb-2"
+                style="color: var(--neon-purple)"
+              >
+                Rewards & Airdrops
+              </h3>
+              <p class="text-gray-300">
+                Earn GI tokens through gameplay and community participation
+              </p>
+            </div>
+            <div
+              class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-pink-500 card-hover"
+            >
+              <h3
+                class="text-xl font-bold mb-2"
+                style="color: var(--neon-pink)"
+              >
+                Marketplace Payments
+              </h3>
+              <p class="text-gray-300">
+                Trade NFTs, Skins, and digital assets using GI tokens
+              </p>
+            </div>
+            <div
+              class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-yellow-500 card-hover"
+            >
+              <h3
+                class="text-xl font-bold mb-2"
+                style="color: var(--neon-gold)"
+              >
+                Staking & Yield
+              </h3>
+              <p class="text-gray-300">
+                Stake GI tokens to earn passive rewards
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokenomics -->
+        <div
+          class="bg-gray-900 bg-opacity-50 p-7 rounded-lg border border-cyan-500"
+        >
+          <h3
+            class="text-3xl font-bold orbitron text-center mb-8"
+            style="color: var(--neon-blue)"
+          >
+            Tokenomics
+          </h3>
+          <div class="grid md:grid-cols-4 gap-4 text-center">
+            <div>
+              <div
+                class="text-4xl font-bold orbitron mb-2"
+                style="color: var(--neon-gold)"
+              >
+                1B GI
+              </div>
+              <div class="text-gray-300">Total Supply</div>
+            </div>
+           
+            <div>
+              <div
+                class="text-4xl font-bold orbitron mb-2"
+                style="color: var(--neon-purple)"
+              >
+                40%
+              </div>
+              <div class="text-gray-300">Community & Rewards</div>
+            </div>
+            <div>
+              <div
+                class="text-4xl font-bold orbitron mb-2"
+                style="color: var(--neon-pink)"
+              >
+                20%
+              </div>
+              <div class="text-gray-300">Development & Ecosystem</div>
+            </div>
+            <div>
+              <div
+                class="text-4xl font-bold orbitron mb-2"
+                style="color: var(--neon-purple)"
+              >
+                20%
+              </div>
+              <div class="text-gray-300">Marketing & Partnerships
+</div>
+            </div>
+            <div>
+              <div
+                class="text-4xl font-bold orbitron mb-2"
+                style="color: var(--neon-pink)"
+              >
+                10%
+              </div>
+              <div class="text-gray-300">Team & Advisors</div>
+            </div>
+             <div>
+              <div
+                class="text-4xl font-bold orbitron mb-2"
+                style="color: var(--neon-purple)"
+              >
+                10%
+              </div>
+              <div class="text-gray-300">Liquidity & Exchange
+</div>
+            </div>
+             <div>
+              <div
+                class="text-2xl font-bold orbitron mb-2"
+                style="color: var(--neon-gold)"
+              >
+                BNB Chain (BEP-20)
+              </div>
+              <div class="text-gray-300">Network</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-5xl font-bold orbitron text-center mb-12"
+          style="color: var(--neon-pink)"
+        >
+          Features
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div
+            class="bg-gray-900 bg-opacity-50 p-8 rounded-lg border border-blue-500 card-hover text-center holographic"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center"
+            >
+              <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                <path
+                  fill="currentColor"
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2" style="color: var(--neon-blue)">
+              AI-Powered Gaming
+            </h3>
+            <p class="text-gray-300">
+              Adaptive challenges, intelligent matchmaking
+
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-900 bg-opacity-50 p-8 rounded-lg border border-purple-500 card-hover text-center holographic"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center"
+            >
+              <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                <path
+                  fill="currentColor"
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-bold mb-2"
+              style="color: var(--neon-purple)"
+            >
+              Telegram Mini-Game
+            </h3>
+            <p class="text-gray-300">
+              Play and earn directly through Telegram bot
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-900 bg-opacity-50 p-8 rounded-lg border border-pink-500 card-hover text-center holographic"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-lg flex items-center justify-center"
+            >
+              <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                <path
+                  fill="currentColor"
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM8.5 16L12 13.5 15.5 16 12 18.5 8.5 16z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2" style="color: var(--neon-pink)">
+              Play-to-Earn
+            </h3>
+            <p class="text-gray-300">
+              Earn real rewards while playing your favorite games
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-900 bg-opacity-50 p-8 rounded-lg border border-yellow-500 card-hover text-center holographic"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center"
+            >
+              <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                <path
+                  fill="currentColor"
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2" style="color: var(--neon-gold)">
+              Metaverse Ready
+            </h3>
+            <p class="text-gray-300">
+              Future integration with VR & AR
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-5xl font-bold orbitron text-center mb-12"
+          style="color: var(--neon-blue)"
+        >
+          Roadmap
+        </h2>
+
+        <div class="relative">
+          <div class="roadmap-line w-full mb-8">
+            <div
+              class="roadmap-point"
+              style="left: 12.5%; color: var(--neon-blue)"
+            ></div>
+            <div
+              class="roadmap-point"
+              style="left: 37.5%; color: var(--neon-purple)"
+            ></div>
+            <div
+              class="roadmap-point"
+              style="left: 62.5%; color: var(--neon-pink)"
+            ></div>
+            <div
+              class="roadmap-point"
+              style="left: 87.5%; color: var(--neon-gold)"
+            ></div>
+          </div>
+
+          <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+              <div
+                class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-blue-500 holographic"
+              >
+                <h3
+                  class="text-xl font-bold mb-2 orbitron"
+                  style="color: var(--neon-blue)"
+                >
+                  Phase 1: Launch
+                </h3>
+                <ul class="text-gray-300 text-sm space-y-1">
+                  <li>GI Token smart contract on BNB Chain</li>
+                  <li>Official Website & Whitepaper release</li>
+                  <li>Telegram Airdrop Campaign</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <div
+                class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-purple-500 holographic"
+              >
+                <h3
+                  class="text-xl font-bold mb-2 orbitron"
+                  style="color: var(--neon-purple)"
+                >
+                  Phase 2: Growth
+                </h3>
+                <ul class="text-gray-300 text-sm space-y-1">
+                  <li>Listing on CEX & DEX exchanges</li>
+                  <li>Telegram Mini-Game release</li>
+                  <li>Strategic Partnerships</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <div
+                class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-pink-500 holographic"
+              >
+                <h3
+                  class="text-xl font-bold mb-2 orbitron"
+                  style="color: var(--neon-pink)"
+                >
+                  Phase 3: Expansion
+                </h3>
+                <ul class="text-gray-300 text-sm space-y-1">
+                  <li>NFT Marketplace integration</li>
+                  <li>AI-powered GameFi Launch</li>
+                  <li>Global marketing campaigns</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <div
+                class="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-yellow-500 holographic"
+              >
+                <h3
+                  class="text-xl font-bold mb-2 orbitron"
+                  style="color: var(--neon-gold)"
+                >
+                  Phase 4: Future
+                </h3>
+                <ul class="text-gray-300 text-sm space-y-1">
+                  <li>Metaverse expansion</li>
+                  <li>AI Gaming Hub</li>
+                    <li>Ecosystem scaling</li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Buy Section -->
+    <section class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-5xl font-bold orbitron text-center mb-12"
+          style="color: var(--neon-purple)"
+        >
+          How to Buy
+        </h2>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div
+              class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center holographic"
+            >
+              <span class="text-2xl font-bold">1</span>
+            </div>
+            <h3 class="text-lg font-bold mb-2" style="color: var(--neon-blue)">
+              Download Wallet
+            </h3>
+            <p class="text-gray-300 text-sm">Get Trust Wallet or MetaMask</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center holographic"
+            >
+              <span class="text-2xl font-bold">2</span>
+            </div>
+            <h3
+              class="text-lg font-bold mb-2"
+              style="color: var(--neon-purple)"
+            >
+              Add BNB Chain
+            </h3>
+            <p class="text-gray-300 text-sm">Configure BNB Smart Chain</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center holographic"
+            >
+              <span class="text-2xl font-bold">3</span>
+            </div>
+            <h3 class="text-lg font-bold mb-2" style="color: var(--neon-pink)">
+              Copy Contract
+            </h3>
+            <p class="text-gray-300 text-sm">Copy GI Token contract address</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center holographic"
+            >
+              <span class="text-2xl font-bold">4</span>
+            </div>
+            <h3 class="text-lg font-bold mb-2" style="color: var(--neon-gold)">
+              Swap on PancakeSwap
+            </h3>
+            <p class="text-gray-300 text-sm">Swap BNB for GI Token on Pancakeswap</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Airdrop Section -->
+    <section class="py-10 relative">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2
+              class="text-5xl font-bold orbitron mb-6 "
+              style="color: var(--neon-gold)"
+            >
+              Airdrop & Mini-Game
+            </h2>
+            <div class="flex">
+            <div
+              class="w-10 h-10  mb-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center holographic"
+            >
+              <span class="text-2xl font-bold">1</span>
+            </div>
+            <div class="ms-5 mt-1 text-lg text-gray-300 ">Join our Telegram Bot to participate in airdrops</div>
+            </div>
+            <div class="flex">
+            <div
+              class="w-10 h-10  mb-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center holographic"
+            >
+              <span class="text-2xl font-bold">2</span>
+            </div>
+            <div class="ms-5 mt-1 text-lg text-gray-300 ">Complete simple tasks to earn free GI Tokens</div>
+            </div>
+           
+            <button
+              class=" mt-5 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-bold  hover:scale-105 transition-transform"
+            >
+              Join Telegram Bot
+            </button>
+          </div>
+          <div class="relative">
+          <img src="./assets/game5.png" style="border-radius: 18px;" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- play -->
+     <section class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-5xl font-bold orbitron text-center mb-12"
+          style="color: var(--neon-gold)"
+        >
+          Play Our AI-powered mini-game
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <img src="./assets/game2.png" style="border-radius: 15px;"/>
+           <img src="./assets/game3.jpg" style="border-radius: 15px;"/>
+            <img src="./assets/game4.jpg" style="border-radius: 15px;"/>
+        </div>
+        </div>
+        </section>
+
+
+    <!-- Team Section -->
+    <section class="py-20 relative">
+      <div class="container mx-auto px-6 text-center">
+        <h2
+          class="text-5xl font-bold orbitron mb-6"
+          style="color: var(--neon-pink)"
+        >
+          Team
+        </h2>
+        <p class="text-lg text-gray-300 mb-12">
+          Backed by global blockchain enthusiasts & AI developers
+        </p>
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="d-flex flex-col items-center">
+          <img src="./assets/pic1.png" style="border-radius: 15px;"/>
+          <div class="text-2xl mt-2 text-white">Mia(CTO)</div>
+          </div>
+          <div class="d-flex flex-col items-center">
+             <img src="./assets/pic2.png" style="border-radius: 15px;"/>
+              <div class="text-2xl mt-2 text-white">Liam(CEO)</div>
+          </div>
+          
+           <div class="d-flex flex-col items-center">
+             <img src="./assets/pic3.png" style="border-radius: 15px;"/>
+              <div class="text-2xl mt-2 text-white">Jack(COO)</div>
+           </div>
+            <div class="d-flex flex-col items-center">
+              <img src="./assets/pic4.png" style="border-radius: 15px;"/>
+                <div class="text-2xl mt-2 text-white">Freya(CMO)</div>
+                </div>
+        </div>
+        
+   
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-5xl font-bold orbitron text-center mb-12"
+          style="color: var(--neon-blue)"
+        >
+          FAQ
+        </h2>
+
+        <div class="max-w-4xl mx-auto space-y-4">
+          <div
+            class="bg-gray-900 bg-opacity-50 border border-cyan-500 rounded-lg"
+          >
+            <button
+              class="w-full p-6 text-left flex justify-between items-center"
+              onclick="toggleAccordion(0)"
+            >
+              <span class="text-lg font-bold" style="color: var(--neon-blue)"
+                >What is GI Token?</span
+              >
+              <span class="text-2xl" id="icon-0">+</span>
+            </button>
+            <div class="accordion-content px-6 pb-6" id="content-0">
+              <p class="text-gray-300">
+                GI Token is an AI-powered gaming cryptocurrency built on BNB
+                Chain that enables players to earn, trade, and own digital
+                assets in a decentralized gaming ecosystem.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-gray-900 bg-opacity-50 border border-purple-500 rounded-lg"
+          >
+            <button
+              class="w-full p-6 text-left flex justify-between items-center"
+              onclick="toggleAccordion(1)"
+            >
+              <span class="text-lg font-bold" style="color: var(--neon-purple)"
+                >Where can I trade GI Token?</span
+              >
+              <span class="text-2xl" id="icon-1">+</span>
+            </button>
+            <div class="accordion-content px-6 pb-6" id="content-1">
+              <p class="text-gray-300">
+                GI Token will be available on PancakeSwap and major centralized
+                exchanges. You can also earn tokens through our Telegram
+                mini-game and airdrop campaigns.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-gray-900 bg-opacity-50 border border-pink-500 rounded-lg"
+          >
+            <button
+              class="w-full p-6 text-left flex justify-between items-center"
+              onclick="toggleAccordion(2)"
+            >
+              <span class="text-lg font-bold" style="color: var(--neon-pink)"
+                >How to earn GI Token?</span
+              >
+              <span class="text-2xl" id="icon-2">+</span>
+            </button>
+            <div class="accordion-content px-6 pb-6" id="content-2">
+              <p class="text-gray-300">
+                You can earn GI tokens by playing our mini-games, participating
+                in airdrops, staking tokens, completing community tasks, and
+                engaging with our gaming ecosystem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+      <div class="container mx-auto px-6 text-center">
+        <h2
+          class="text-5xl font-bold orbitron mb-12"
+          style="color: var(--neon-gold)"
+        >
+          Contact
+        </h2>
+
+        <div class="mb-12">
+          
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="flex flex-col items-center">
+            <div
+              class="w-16 h-16 mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center"
+            >
+              <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                <path
+                  fill="currentColor"
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold mb-2" style="color: var(--neon-blue)">
+              Email
+            </h3>
+            <p class="text-gray-300">info@gamingintelligence.io</p>
+          </div>
+          
+          <div class="flex flex-col items-center">
+            
+            <div
+              class="w-16 h-16 mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center"
+            >
+            <a href="https://t.me/Gaming_Intelligence" target="_blank">
+              <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                <path
+                  fill="currentColor"
+                  d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"
+                />
+              </svg>
+            </div>
+            <h3
+              class="text-lg font-bold mb-2"
+              style="color: var(--neon-purple)"
+            >
+              Telegram
+            </h3>
+           <p class="text-gray-300">@GamingIntelligence</p></a>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div
+              class="w-16 h-16 mb-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-lg flex items-center justify-center"
+            >
+            <a href="https://x.com/GI_Token_" target="_blank">
+              <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                <path
+                  fill="currentColor"
+                  d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+                />
+              </svg>
+              </a>
+            </div>
+            <h3 class="text-lg font-bold mb-2" style="color: var(--neon-pink)">
+              Twitter
+            </h3>
+            <p class="text-gray-300">@GamingIntelligenceAI</p>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="text-lg text-gray-300 mb-4">
+            Website: www.gamingintelligence.org
+          </p>
+          <p class="text-sm text-gray-500">
+            © 2025 Gaming Intelligence. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function toggleAccordion(index) {
+          const content = document.getElementById(content-{index});
+          const icon = document.getElementById(icon-{index});
+
+          if (content.classList.contains('active')) {
+              content.classList.remove('active');
+              icon.textContent = '+';
+          } else {
+              // Close all other accordions
+              document.querySelectorAll('.accordion-content').forEach(item => {
+                  item.classList.remove('active');
+              });
+              document.querySelectorAll('[id^="icon-"]').forEach(item => {
+                  item.textContent = '+';
+              });
+
+              // Open current accordion
+              content.classList.add('active');
+              icon.textContent = '−';
+          }
+      }
+
+
+  function toggleAccordion(index) {
+    const content = document.getElementById(`content-${index}`);
+    const icon = document.getElementById(`icon-${index}`);
+
+    // Toggle visibility
+    content.classList.toggle("active");
+
+    // Change + to -
+    if (content.classList.contains("active")) {
+      icon.textContent = "−";
+    } else {
+      icon.textContent = "+";
+    }
+  }
+
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              const target = document.querySelector(this.getAttribute('href'));
+              if (target) {
+                  target.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                  });
+              }
+          });
+      });
+
+      // Add scroll effect to navigation
+      window.addEventListener('scroll', function() {
+          const nav = document.querySelector('nav');
+          if (window.scrollY > 100) {
+              nav.style.background = 'rgba(0, 0, 0, 0.95)';
+          } else {
+              nav.style.background = 'rgba(0, 0, 0, 0.8)';
+          }
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'97df0a12f7ec3501',t:'MTc1NzY3NjI3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
