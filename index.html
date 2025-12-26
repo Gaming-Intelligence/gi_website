@@ -258,17 +258,51 @@
     <p class="text-xl md:text-2xl mb-8 text-gray-100">
       The Future of AI-Powered Gaming on Blockchain
     </p>
-    <div class="flex flex-col md:flex-row gap-4 justify-center">
-      <!-- <button
-        class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg font-bold neon-glow hover:scale-105 transition-transform"
+    <div>
+  
+     <button class="text-1xl"
+  
+  style=" padding:16px 32px; font-weight:bold; border-radius:8px; background:linear-gradient(to right, #06b6d4, #2563eb); color:white; border:none; cursor:pointer;"
+>
+  Bep20 contract address : <span id="wallet">0x99c56F3C1346CC7C22bC7C300F3396AE6eDf69FF</span> 
+</button>
+
+
+
+<script>
+  document.getElementById("wallet").addEventListener("click", function () {
+    const text = this.innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      this.innerText = "Copied ✅";
+      setTimeout(() => {
+        this.innerText = "0x99c56F3C1346CC7C22bC7C300F3396AE6eDf69FF";
+      }, 1500);
+    });
+  });
+</script>
+</div>
+
+      <div class="mt-5">
+         
+      <button id="wall"
+        class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold  hover:scale-105 transition-transform cursor:pointer;"
       >
-        Join Airdrop
-      </button> -->
-      <button
-        class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold neon-glow hover:scale-105 transition-transform"
-      >
-        Trade GI Token
+       Polygon contract address: <span id="wallet2"> 0xeed271D85f35D8194CAFFa04320a7675fFf7582f</span>
       </button>
+      <script>
+  document.getElementById("wallet2").addEventListener("click", function () {
+    const text = this.innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      this.innerText = "Copied ✅";
+      setTimeout(() => {
+        this.innerText = " 0xeed271D85f35D8194CAFFa04320a7675fFf7582f";
+      }, 1500);
+    });
+  });
+</script>
+      </div>
     </div>
   </div>
 </section>
@@ -462,8 +496,9 @@
                 class="text-4xl font-bold orbitron mb-2"
                 style="color: var(--neon-gold)"
               >
-                1B GI
+                10M GI
               </div>
+              <div  class="text-1xl font-bold orbitron mb-2">(5M Bep20 & 5M Polygon)</div>
               <div class="text-gray-300">Total Supply</div>
             </div>
            
@@ -607,8 +642,7 @@
           </div>
 
           <div
-            class="bg-gray-900 bg-opacity-50 p-8 rounded-lg border border-yellow-500 card-hover text-center holographic"
-          >
+            class="bg-gray-900 bg-opacity-50 p-8 rounded-lg border border-yellow-500 card-hover text-center holographic">
             <div
               class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center"
             >
@@ -631,7 +665,8 @@
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="py-20 relative">
+    <se
+    ction id="roadmap" class="py-20 relative">
       <div class="container mx-auto px-6">
         <h2
           class="text-5xl font-bold orbitron text-center mb-12"
@@ -862,7 +897,7 @@
 
 
     <!-- Team Section -->
-    <section class="py-20 relative">
+    <!-- <section class="py-20 relative">
       <div class="container mx-auto px-6 text-center">
         <h2
           class="text-5xl font-bold orbitron mb-6"
@@ -895,7 +930,7 @@
         
    
       </div>
-    </section>
+    </section> -->
 
     <!-- FAQ Section -->
     <section class="py-20 relative">
